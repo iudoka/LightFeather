@@ -30,7 +30,7 @@ public class EncodeController extends AbstractController {
 	private EncodingService service;
 
 	@PostMapping("/encode")
-	public EncodedResponse search(@RequestBody EncodeRequest request, HttpSession session, HttpServletResponse response)
+	public EncodedResponse encode(@RequestBody EncodeRequest request, HttpSession session, HttpServletResponse response)
 			throws GenericException {
 		//
 		logger.info("Encoding Request Received: {}", ReflectionToStringBuilder.toString(request));
