@@ -1,0 +1,4 @@
+// Registration
+export const REGISTRATION_STARTED = 'AUTH_STARTED';
+export const REGISTRATION_SUCCESS = 'AUTH_SUCCESS';
+export const REGISTRATION_FAILED = 'AUTH_FAILED';

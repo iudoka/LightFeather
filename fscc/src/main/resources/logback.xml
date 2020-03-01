@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_HOME" value="/data/app/logs" />
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- For running in containers. -->
+	<appender name="json" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder
+			class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>${TZ}</timeZone>
+				</timestamp>
+				<logLevel>
+					<fieldName>logLevel</fieldName>
+				</logLevel>
+				<message>
+					<fieldName>msg</fieldName>
+				</message>
+				<arguments>
+					<includeNonStructuredArguments>true</includeNonStructuredArguments>
+				</arguments>
+				<mdc />
+				<threadName>
+					<fieldName>thread</fieldName>
+				</threadName>
+				<callerData>
+					<classFieldName>class</classFieldName>
+					<methodFieldName>method</methodFieldName>
+					<fileFieldName>file</fileFieldName>
+					<lineFieldName>line</lineFieldName>
+				</callerData>
+				<stackTrace />
+			</providers>
+		</encoder>
+	</appender>
+	
+	<!--  -->
+	<logger name="org.apache" level="error"
+		additivity="true">
+	</logger>
+	
+	<!--  -->
+	<logger name="org.springframework" level="error"
+		additivity="true">
+	</logger>
+	
+	<!-- ${logging.level.default} -->
+	<logger name="com.fscc" level="debug"
+		additivity="true">
+	</logger>
+	
+	<!-- ${logging.type} -->
+	<root level="error">
+	  <appender-ref ref="json" />
+	</root>
+	
+</configuration>
